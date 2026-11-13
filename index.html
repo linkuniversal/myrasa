@@ -66,6 +66,8 @@
             background-color: var(--myrasa-abyss);
             -webkit-text-size-adjust: 100%;
             text-size-adjust: 100%;
+            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
@@ -79,6 +81,7 @@
             align-items: center;
             padding: 0 14px calc(80px + env(safe-area-inset-bottom, 0px));
             overflow-x: hidden;
+            overflow-x: clip;
             width: 100%;
             position: relative;
             letter-spacing: -0.01em;
@@ -110,7 +113,6 @@
             transform: translate3d(0, -8vh, 0) scale(1.02);
         }
 
-        /* Velo onírico azul marino & nacarado para que nunca compita con la tipografía */
         .oniric-color-veil {
             position: absolute;
             inset: 0;
@@ -125,7 +127,6 @@
                 );
         }
 
-        /* Destellos de luz estilo cine fantástico / Almodóvar (bloom cálido + prisma celeste) */
         .oniric-flare {
             position: absolute;
             border-radius: 50%;
@@ -213,21 +214,23 @@
            4. CÚPULA INVERTIDA BLANCA SUPERIOR (SOLO PARA EL LOGO OFICIAL)
            ========================================================================== */
         .top-cupola-stage {
-            width: 100%;
+            width: calc(100% + 28px);
+            margin-left: -14px;
+            margin-right: -14px;
             display: flex;
             justify-content: center;
             position: relative;
             z-index: 15;
             margin-bottom: 14px;
+            overflow: hidden;
         }
 
         .inverted-white-cupola {
-            width: min(560px, 108vw);
-            margin-left: -14px;
-            margin-right: -14px;
+            width: min(640px, 126vw);
+            flex-shrink: 0;
             background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 76%, #F3F9FF 100%);
-            border-radius: 0 0 50% 50% / 0 0 100% 100%;
-            padding: clamp(22px, 5vw, 32px) clamp(26px, 7vw, 48px) clamp(30px, 6vw, 42px);
+            border-radius: 0 0 50% 50% / 0 0 70% 70%;
+            padding: clamp(20px, 5vw, 32px) clamp(32px, 8vw, 48px) clamp(34px, 7vw, 44px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -241,7 +244,7 @@
             content: '';
             position: absolute;
             inset: -40px 8px 6px 8px;
-            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            border-radius: 0 0 50% 50% / 0 0 70% 70%;
             border: 1px solid rgba(4, 83, 170, 0.14);
             pointer-events: none;
         }
@@ -266,7 +269,7 @@
 
         .myrasa-logo-frame {
             width: 100%;
-            max-width: clamp(245px, 68vw, 325px);
+            max-width: clamp(195px, 56vw, 325px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -364,6 +367,7 @@
             cursor: pointer;
             box-shadow: 0 6px 18px rgba(1, 25, 56, 0.16);
             transition: all 0.25s var(--spring);
+            flex-shrink: 0;
         }
 
         .lang-switch-pill:hover {
@@ -598,6 +602,7 @@
             color: rgba(232, 244, 255, 0.92);
             font-weight: 500;
             line-height: 1.35;
+            overflow-wrap: anywhere;
         }
 
         .hero-wa-circle {
@@ -615,6 +620,7 @@
             transition: transform 0.3s var(--spring);
             position: relative;
             z-index: 2;
+            flex-shrink: 0;
         }
 
         .hero-ops-cta-wrap:hover .hero-wa-circle {
@@ -647,6 +653,7 @@
             flex-direction: column;
             justify-content: space-between;
             min-height: 142px;
+            min-width: 0;
             text-decoration: none;
             color: var(--text-title);
             box-shadow: var(--shadow-card);
@@ -700,6 +707,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 6px;
             width: 100%;
             margin-bottom: 10px;
         }
@@ -707,6 +715,7 @@
         .tile-icon-box {
             width: 38px;
             height: 38px;
+            flex-shrink: 0;
             border-radius: 11px;
             background: var(--myrasa-sky-soft);
             color: var(--myrasa-cobalt);
@@ -736,6 +745,8 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--myrasa-sky);
+            white-space: nowrap;
+            text-align: right;
         }
 
         .tile-title {
@@ -752,6 +763,7 @@
             line-height: 1.38;
             margin-top: 4px;
             font-weight: 500;
+            overflow-wrap: anywhere;
         }
 
         .tile-arrow {
@@ -1457,7 +1469,7 @@
         }
 
         /* ==========================================================================
-           16. AJUSTES RESPONSIVOS DESKTOP / TABLET / MÓVIL ESTRECHO
+           16. AJUSTES RESPONSIVOS DESKTOP / MÓVIL / WEBVIEW ULTRA-ANGOSTO (IG & WA)
            ========================================================================== */
         @media (min-width: 768px) {
             .master-hub-shell {
@@ -1465,11 +1477,25 @@
                 gap: 17px;
             }
             .inverted-white-cupola {
-                width: 620px;
+                width: 640px;
                 padding: 28px 54px 40px;
             }
             .myrasa-logo-frame {
                 max-width: 345px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .bento-tile {
+                padding: 15px 13px;
+            }
+            .tile-icon-box {
+                width: 35px;
+                height: 35px;
+            }
+            .tile-index {
+                font-size: 0.56rem;
+                letter-spacing: 0.04em;
             }
         }
 
@@ -1481,7 +1507,35 @@
                 grid-template-columns: 1fr;
             }
             .inverted-white-cupola {
-                padding: 20px 22px 28px;
+                padding: 18px 26px 30px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .maritime-bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .bento-tile.full-span {
+                grid-column: span 1;
+            }
+            .bento-tile {
+                min-height: auto;
+                border-radius: 18px !important;
+            }
+            .tile-index {
+                font-size: 0.62rem;
+                letter-spacing: 0.08em;
+            }
+            .staff-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .staff-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            .utility-telemetry-bar {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -1718,7 +1772,7 @@
             <!-- 05 · FULL-SPAN: SITIO WEB & ACCESO A CLIENTES -->
             <a href="https://myrasa.com.ar/home/" target="_blank" rel="noopener noreferrer" class="bento-tile full-span" onclick="playHaptic()">
                 <div style="min-width: 0;">
-                    <span class="tile-index" style="display:block; margin-bottom:2px;" data-i18n="portalTag">Portal Corporativo · Acceso a Clientes</span>
+                    <span class="tile-index" style="display:block; margin-bottom:2px; text-align:left;" data-i18n="portalTag">Portal Corporativo · Acceso a Clientes</span>
                     <h3 class="tile-title" style="font-size: 1.32rem;" data-i18n="portalTitle">Sitio Web Oficial MYRASA</h3>
                     <p class="tile-desc">www.myrasa.com.ar · Gestión y seguimiento para armadores y clientes</p>
                 </div>
@@ -1726,6 +1780,7 @@
             </a>
 
         </section>
+
 <!-- DIRECTORIO INTERACTIVO DE OFICINAS PROPIAS Y GUARDIAS POR PUERTO -->
         <section class="ports-directory-card" aria-label="Directorio por Puerto">
             <div class="directory-head">
@@ -1821,7 +1876,7 @@
     <!-- ==========================================================================
          MODAL 1: SERVICIOS PORTUARIOS INTEGRALES
          ========================================================================== -->
-    <div class="modal-backdrop" id="servicesModal" onclick="closeModal('servicesModal', event)">
+    <div class="modal-backdrop" id="servicesModal" onclick="closeModal('servicesModal')">
         <div class="modal-sheet" onclick="event.stopPropagation()">
             <div class="modal-top">
                 <h3 class="modal-top-title" data-i18n="modServTitle">Servicios Integrales MYRASA</h3>
@@ -1834,7 +1889,7 @@
     <!-- ==========================================================================
          MODAL 2: RED DE PUERTOS OPERATIVOS (20 PUERTOS CON FILTRO)
          ========================================================================== -->
-    <div class="modal-backdrop" id="portsModal" onclick="closeModal('portsModal', event)">
+    <div class="modal-backdrop" id="portsModal" onclick="closeModal('portsModal')">
         <div class="modal-sheet" onclick="event.stopPropagation()">
             <div class="modal-top">
                 <h3 class="modal-top-title" data-i18n="modPortsTitle">Puertos Donde Operamos</h3>
@@ -1855,7 +1910,7 @@
     <!-- ==========================================================================
          MODAL 3: ORGANIGRAMA OPERATIVO & CONDUCCIÓN
          ========================================================================== -->
-    <div class="modal-backdrop" id="orgModal" onclick="closeModal('orgModal', event)">
+    <div class="modal-backdrop" id="orgModal" onclick="closeModal('orgModal')">
         <div class="modal-sheet" onclick="event.stopPropagation()">
             <div class="modal-top">
                 <h3 class="modal-top-title" data-i18n="modOrgTitle">Estructura &amp; Organigrama</h3>
@@ -2218,7 +2273,6 @@
             if (!parallaxImg) return;
             const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
             const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
-            // Al hacer scroll down la imagen desciende suavemente (-8vh a +8vh) dentro del margen seguro de 126vh
             const shiftVh = (-8 + (progress * 16)).toFixed(3);
             parallaxImg.style.transform = `translate3d(0, ${shiftVh}vh, 0) scale(1.02)`;
         }
